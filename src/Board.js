@@ -194,15 +194,88 @@
 
 
     // Major Diagonals - go from top-left to bottom-right
+
+    //Check if there are any 1's in current array and if there are any 1's in other array at cur index
+    //Check next array index + 1 and index - 1
+
     // --------------------------------------------------------------
     //
     // test if a specific major diagonal on this board contains a conflict
-    hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
+    // [0, 1, 0, 0],
+    // [0, 0, 1, 0],
+    // [0, 0, 0, 0],
+    // [0, 0, 0, 0]
+
+    //Create index var equal to input
+    //Create pieces = 0
+    //If given index is equal to last item
+      //return false
+    //Loop through each key ignoring n
+      //Look at index of curArr at given index + 1
+      //Add 1 to index
+
+
+      /*
+      var row = row !== undefined ? row : 0;
+      //index = 1 row = 0
+      var pieces = 0;
+      var index = majorDiagonalColumnIndexAtFirstRow;
+      console.log(index);
+      if (index === this.attributes.n - 1) {
+        return false;
+      }
+      for (var x = row; x < this.attributes.n; x++) {
+        var row = this.get(x);
+        pieces += row[index];
+        if (pieces > 1) {
+          return true;
+        }
+        index++;
+        if (index === this.attributes.n) {
+          return false;
+        }
+      }
       return false; // fixme
+      */
+
+    hasMajorDiagonalConflictAt: function(rowNum) {
+      var pieces = 0;
+      if (rowNum < 0 || rowNum > this.attributes.n - 1) {
+        return false;
+      }
+      console.log(rowNum);
+      var indexAt1 = this.get(rowNum).indexOf(1);
+      if (indexAt1 === -1) {
+        return false;
+      }
+      for (var x = indexAt1; x < this.attributes.n; x++) {
+        curRow = this.get(rowNum);
+        pieces += curRow[x];
+        if (pieces > 1) {
+          return true;
+        }
+        rowNum++;
+        if (rowNum === this.attributes.n) {
+          return false;
+        }
+      }
+      return false; // fixme
+
     },
+
+    //Loop through this.atrributes.n ignoring n
+
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
+      for (var x = 0; x < this.attributes.n; x++) {
+        var index = this.get(x).indexOf(1);
+        if (index !== -1) {
+          if (this.hasMajorDiagonalConflictAt(index, x)) {
+            return true;
+          }
+        }
+      }
       return false; // fixme
     },
 
