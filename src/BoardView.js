@@ -18,9 +18,10 @@
         return $('<tr class="row"/>').html(_(_.range(model.get('n'))).map(function(colIndex) {
           var $square = $('<td class="square"/>').on('click', function(e) {
             model.togglePiece(rowIndex, colIndex);
+            console.log('boardview.js:', rowIndex, colIndex);
           }).addClass(['positive', 'negative'][(rowIndex + colIndex) % 2]);
           model.get(rowIndex)[colIndex] && $square.html('&#9813;');
-          model.hasAnyQueenConflictsOn(rowIndex, colIndex) && $square.addClass('inConflict');
+          model.hasAnyQueenConflictsOn(rowIndex, colIndex) && $square.addClass('inConflict') && console.log('conflicts at:', rowIndex, colIndex);
           return $square;
         }));
       }));
